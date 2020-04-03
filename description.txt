@@ -1,0 +1,15 @@
+这是第一个SpringMVC项目
+
+目的:学会SpringMVC的基本使用
+
+第一步:下载核心jar
+
+第二部:配置前端控制器DispatherServlet
+
+第三部:创建一个index.html
+
+第四部:创建SpringMVC的配置文件
+
+第五部： 创建一个usercontroller，配置<bean>的方式就必须实现Controller接口
+
+第六部； 处理请求   

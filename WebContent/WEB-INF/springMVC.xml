@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <!-- 无论是注解式和配置式必须加 -->
+	<mvc:annotation-driven />
+	
+	<!-- 声明controller，让容器创建，然后把请求交给这个controller id:请求url，/开头 class:类名 -->
+	<bean id="/first.do" class="Controller.UserController" />
+	
+	<!-- 配置视图解析器 ,简化对扩展名的书写-->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<!-- 配置前缀和后缀 -->
+	<property name="prefix" value="/WEB-INF/jsp/"/>
+	<property name="suffix" value=".jsp"/>
+	</bean>
+
+</beans>
