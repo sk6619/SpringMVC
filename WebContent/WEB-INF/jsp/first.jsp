@@ -12,6 +12,7 @@
   <br>
   <c:forEach items="${list}" var="string">
   ${string}
+  
   <br>
   </c:forEach>
 </body>
