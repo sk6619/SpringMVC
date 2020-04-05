@@ -3,18 +3,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
-        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
 
 
     <!-- 无论是注解式和配置式必须加 -->
 	<mvc:annotation-driven />
+	<!-- 配置启动注解，扫描加载Controller的包 -->
+	<context:component-scan base-package="Controller"></context:component-scan>
 	
 	<!-- 声明controller，让容器创建，然后把请求交给这个controller id:请求url，/开头 class:类名 -->
 	<bean id="/first.do" class="Controller.UserController" />
+	<bean id="/first1.do" class="Controller.User1Controller"/>
 	
 	<!-- 配置视图解析器 ,简化对扩展名的书写-->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

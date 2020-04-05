@@ -23,7 +23,8 @@ public class UserController implements Controller{
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mView = new ModelAndView();
-		mView.addObject("msg", "第一个SpringMVC/采用配置");
+		mView.addObject("msg", "第一个SpringMVC,"
+				+ "通过实现Controller接口配置<bean>来实现一个Controller");
 		slist = new ArrayList<String>();
 		slist.add("hello");
 		slist.add("word");
