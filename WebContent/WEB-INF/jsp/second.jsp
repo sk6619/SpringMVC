@@ -13,5 +13,7 @@
     			<input type="text" name="点我" />
     			<input type="submit" value="提交"/>
    			</form>
+   			
+   			${name}
 </body>
 </html>
