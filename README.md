@@ -220,3 +220,119 @@ public ModelAndView useAnaotation1() {
 		return "second";
 	}
 其他几个注解也没什么好讲的
+
+SpringMVC3
+SpringMVC中比较重要的几个注解
+
+一：@PathVariable
+/**
+	 * 通过url:/pathVariable/{paramId}/{paramName}.do
+	 * 解析出paramId和paramName
+	 * @param paramId--- id
+	 * @param paramName ---name
+	 * @return mv
+	 */
+	@RequestMapping("/pathVariable/{paramId}/{paramName}.do")
+	public ModelAndView methodPathVariable(@PathVariable(value = "paramId",required = false) Integer id,
+			@PathVariable(value = "paramName",required = false) String name) {
+		ModelAndView mvieView = new ModelAndView();
+		// 将获取到的参数添加到model里面在页面查看 
+		mvieView.addObject("paramId", id+"@pathVariable");
+		mvieView.addObject("paramName", name+"@pathVariable");
+		mvieView.setViewName("third");
+		return mvieView;
+	}
+
+二：@RequestParam
+/**
+	 * 参数绑定，传过来的参数绑定到不通的参数名
+	 * @param paramId
+	 * @param paramName 
+	 * @return mv
+	 */
+	@RequestMapping("/pathRequestParam.do")
+	public ModelAndView methodRequest(@RequestParam(value = "paramId",required = false) Integer id,
+			@RequestParam(value = "paramName",required = false) String name) {
+		ModelAndView mvieView = new ModelAndView();
+		// 将获取到的参数添加到model里面在页面查看 
+		mvieView.addObject("paramId", id);
+		mvieView.addObject("paramName", name);
+		mvieView.setViewName("third");
+		return mvieView;
+	}
+三：@pathParam
+/**
+	 * rest风格，只支持post请求
+	 * 
+	 * @param 页面表单传过来的paramId绑定到paramId   不能改不通的参数名 亲测
+	 * @param 页面表单传过来的paramName绑定到paramName
+	 * @return
+	 */
+	@RequestMapping(value = "/pathParam.do", method = RequestMethod.POST)
+	public ModelAndView methodParam(@PathParam(value="paramId") Integer paramId, @PathParam("paramName") String paramName) {
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("paramId", paramId);
+		mView.addObject("paramName", paramName);
+		mView.setViewName("third");
+		return mView;
+	}
+	//@pathParam效果和直接匹配对应的参数名是一样的
+	@RequestMapping(value = "/pathParam1.do", method = RequestMethod.POST)
+	public ModelAndView methodParam1( Integer paramId,  String paramName) {
+		ModelAndView mView = new ModelAndView();
+		mView.addObject("paramId", paramId);
+		mView.addObject("paramName", paramName);
+		mView.setViewName("third");
+		return mView;
+	}
+	一：重定向
+原理：
+
+重定向是一个客户端行为，用户请求到达服务器之后，服务器返回响应，HTTP状态码置为302，并将转发的页面保存在响应头中的Location属性中，告诉客户端应该向这个地址发出请求，然后客户端再次发出请求。
+在整个过程中客户端发送了最少两次请求，因为请求是不同的，因此request和response对象在重定向前后是不同的，两个对象中的attribute在重定向前后也都是不同的。
+ 重定向可以访问当前Web应用之外的资源。
+
+// 方法返回String，重定向
+	@GetMapping("/second7.do")
+	public String useString1(HttpServletRequest request,HttpServletResponse respo) {
+		//respo.sendRedirect("test.jsp");
+		return "redirect:second6.do";
+	}
+
+二：转发
+所谓请求转发，是服务器的行为，请求由服务器转发给另外一个页面处理，如何转发，何时转发，转发几次，客户端是不知道的。请求转发时，从发送第一次到最后一次请求的过程中，web容器只创建一次request和response对象，新的页面继续处理同一个请求。也可以理解为服务器将request对象在页面之间传递。
+// 转发
+	@RequestMapping("/second8.do")
+	public void forwardString(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("first").forward(request, response);
+	}
+
+请求转发之后地址栏的信息并不会有任何的改变。
+// 转发
+	@RequestMapping("/second8.do")
+	public void forwardString(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("name", "shaokui");
+		//转发：所以服务器直接将请求发出去的，所以还是原来的请求
+		//整个过程请求只有一个，所以second页面能接受这个属性
+		request.getRequestDispatcher("second6.do").forward(request, response);
+	}
+转发浏览器的地址是不变的，因为这个转发过程是服务器完成的
+请求重定向之后地址栏是会改变的，变为跳转之后的页面地址。
+@GetMapping("/second7.do")
+	public String useString1(HttpServletRequest request,HttpServletResponse respo) {
+		//respo.sendRedirect("test.jsp");
+		return "redirect:second6.do";
+	}
+重定向就是让浏览器重新发请求
+访问second7.do之后服务器立即将响应给浏览器。浏览器立即重写发一个请求到second6.do
+所以浏览器地址立马发生改变
+
+
+
+重定向会有一个302的状态码
+
+三：重定向的 / 表示：http://服务器ip:端口/
+相当于jsp页面的超链接加/一样
+四：请求转发的 / 表示：http://服务器ip:端口/项目名
+
+	
