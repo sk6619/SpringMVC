@@ -8,24 +8,24 @@
 按照配置servlet的方式，官网给的配置方式：
  <web-app>
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+<listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
 
-    <context-param>
+<context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/app-context.xml</param-value>
+</context-param>
+
+<servlet>
+    <servlet-name>app</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/app-context.xml</param-value>
-    </context-param>
-
-    <servlet>
-        <servlet-name>app</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/app-context.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+</servlet>
 
     <servlet-mapping>
         <servlet-name>app</servlet-name>
@@ -73,14 +73,14 @@ import org.springframework.web.servlet.mvc.Controller;
 public class UserController implements Controller{
 
 	
-	@Override
-	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mView = new ModelAndView();
-		mView.addObject("msg", "第一个SpringMVC/采用配置");
-		mView.setViewName("/WEB-INF/html/first.jsp");
-		return mView;
-	}
-	
+@Override
+public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	ModelAndView mView = new ModelAndView();
+	mView.addObject("msg", "第一个SpringMVC/采用配置");
+	mView.setViewName("/WEB-INF/html/first.jsp");
+	return mView;
+}
+
 }
 
 视图解析器
@@ -151,14 +151,14 @@ public class UserController implements Controller{
 @Controller
 public class AnotationController {
 	
-	@RequestMapping("/second.do")
-	public ModelAndView getAndView() {
-		ModelAndView mView = new ModelAndView();
-		//在mView里面添加一个字符串shaokui，键为user
-		mView.addObject("user", "shaokui");
-		mView.setViewName("second");
-		return mView;
-	}
+@RequestMapping("/second.do")
+public ModelAndView getAndView() {
+	ModelAndView mView = new ModelAndView();
+	//在mView里面添加一个字符串shaokui，键为user
+	mView.addObject("user", "shaokui");
+	mView.setViewName("second");
+	return mView;
+}
 
 }
 三：使用注解
@@ -219,7 +219,7 @@ public ModelAndView useAnaotation1() {
 		//配置了视图解析器，所以返回的字符串会匹配视图
 		return "second";
 	}
-其他几个注解也没什么好讲的
+
 
 SpringMVC3
 SpringMVC中比较重要的几个注解
@@ -285,7 +285,8 @@ SpringMVC中比较重要的几个注解
 		mView.setViewName("third");
 		return mView;
 	}
-	一：重定向
+	
+一：重定向
 原理：
 
 重定向是一个客户端行为，用户请求到达服务器之后，服务器返回响应，HTTP状态码置为302，并将转发的页面保存在响应头中的Location属性中，告诉客户端应该向这个地址发出请求，然后客户端再次发出请求。
