@@ -1,12 +1,84 @@
+<!-- html或者jsp页面引用jar包中的js文件 -->
+
 <!DOCTYPE html>
+
 <html>
 <head>
+<script type="text/javascript" src="js/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>第一个SpringMVC</title>
 </head>
 <body>
 
     message:<a href="first.do">你好点击跳转</a>
-
+    
+    <br>
+    
+    发起ajax请求返回String：<input type="button" id="ajax">
+  <br>
+  <br>
+  发送ajax请求返回User对象：<input type="button" id="ajax1"/>
+  <br>
+  <br>
+  发送ajax请求返回Json格式的User对象：<input type="button" id="ajax2"/>
+   <br>
+  <br>
+  发送ajax请求返回Json格式的User对象：<input type="button" id="ajax3"/>
 </body>
+<!-- 成功 -->
+<script type="text/javascript">
+     $("#ajax").click(function () {
+		$.ajax({
+			url:"void.do",
+			data:{
+				"name":"shaokui",
+				"age":20
+			},
+			type:"get",
+			success:function(resp){
+				alert(resp)
+			},
+		})
+	})
+	
+	$("#ajax1").click(function(){
+		$.ajax({
+			url:"void1.do",
+			data:{
+				"name":"邵洁",
+				"age":20
+			},
+			type:"post",
+			success:function(data){
+				alert(data)
+			},
+			error:function(){
+				alert("失败")
+			}
+		})
+	})
+	
+	$("#ajax2").click(function() {
+		$.ajax({
+			url:"void2.do",
+			data:{
+				"name":"张三",
+				"age":"55"
+			},
+			dataType:"json",
+			success:function(data){
+				alert(data)
+			}
+		})
+	})
+	$("#ajax3").click(function(){
+		$.ajax({
+			url:"void3.do",
+			dataType:"json",
+			success:function(data) {
+				alert(data[0].name)
+			}
+		})
+	})
+</script>
 </html>

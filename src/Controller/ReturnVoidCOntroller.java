@@ -50,7 +50,7 @@ public class ReturnVoidCOntroller {
 		User user = new User(name, age);
 		response.setCharacterEncoding("utf-8");
 		PrintWriter outWriter = response.getWriter();
-		outWriter.print(user);
+		outWriter.print(user.toString());
 		outWriter.flush();
 		outWriter.close();
 	}

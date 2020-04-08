@@ -20,5 +20,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0"/>
+	<classpathentry kind="lib" path="E:/Jar/Jquery/jquery-3.3.1.jar"/>
+	<classpathentry kind="lib" path="E:/Jar/jackson/jackson-core-2.10.3.jar"/>
+	<classpathentry kind="lib" path="E:/Jar/jackson/jackson-core-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="E:/Jar/jackson/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="E:/Jar/jackson/jackson-databind-2.10.0.jar"/>
+	<classpathentry kind="lib" path="E:/Jar/jackson/jackson-annotations-2.10.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

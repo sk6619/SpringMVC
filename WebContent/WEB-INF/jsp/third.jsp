@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- basepath=http//localhost:8080/上下文路径 -->
+<!-- basepath=http://localhost:8080/上下文路径 -->
 <% String basePath = request.getScheme()+"://"+request.getServerName()+":"
    +request.getServerPort()+request.getContextPath()+"/"; %>
    

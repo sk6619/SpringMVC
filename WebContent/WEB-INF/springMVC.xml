@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -12,11 +11,16 @@
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd">
 
-
     <!-- 无论是注解式和配置式必须加 -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+		 <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+        </mvc:message-converters>
+	</mvc:annotation-driven>
+	
 	<!-- 配置启动注解，扫描加载Controller的包 -->
-	<context:component-scan base-package="Controller"></context:component-scan>
+	<context:component-scan base-package="Controller"/>
 	
 	<!-- 声明controller，让容器创建，然后把请求交给这个controller id:请求url，/开头 class:类名 -->
 	<bean id="/first.do" class="Controller.UserController" />
