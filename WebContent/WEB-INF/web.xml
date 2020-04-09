@@ -12,6 +12,10 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	<!-- 项目默认异常页面 -->
+	<error-page>
+	<location>/defaultERROR.jsp</location>
+	</error-page>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
