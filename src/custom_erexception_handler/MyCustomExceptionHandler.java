@@ -14,7 +14,7 @@ import custom_exception.NameException;
  * @author Administrator
  *
  */
-public class MyCustomExceptionController implements HandlerExceptionResolver{
+public class MyCustomExceptionHandler implements HandlerExceptionResolver{
 
 	/**
 	 * obj :发生异常的Controller对象

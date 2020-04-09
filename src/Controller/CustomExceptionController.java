@@ -1,6 +1,7 @@
 package Controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,8 +17,7 @@ import custom_exception.NameException;
  *
  */
 @Controller
-public class ExceptionController {
-	
+public class CustomExceptionController {
 	/**
 	 * 模拟一个异常处理
 	 * @param username   客户端参数name绑定到服务器username
@@ -42,5 +42,17 @@ public class ExceptionController {
 		mView.setViewName("second");
 		return mView;
 	}
+		//该方法处理这个类的姓名异常
+		@ExceptionHandler(value = NameException.class)
+		public ModelAndView handExce(Exception exception) {
+			//处理异常，日志，数据库，短信。。
+			
+			//返回异常视图
+			ModelAndView mView = new ModelAndView();
+			mView.addObject("nameEx", exception.getMessage());
+			mView.addObject("exception", exception);
+			mView.setViewName("error");
+			return mView;
+		}
 
 }

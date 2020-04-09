@@ -25,8 +25,9 @@
 	<!-- 声明controller，让容器创建，然后把请求交给这个controller id:请求url，/开头 class:类名 -->
 	<bean id="/first.do" class="Controller.UserController" />
 	<bean id="/first1.do" class="Controller.User1Controller"/>
+	
 	<!-- 配置异常处理器 -->
-	<bean class="custom_erexception_handler.MyCustomExceptionController"/>
+	<!-- <bean class="custom_erexception_handler.MyCustomExceptionHandler"/> -->
 	
 	<!-- 配置视图解析器 ,简化对扩展名的书写-->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
