@@ -38,6 +38,7 @@
 	  <filter-name>CharacterEncodingFilter</filter-name>
 	  <url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
 	<!-- 配置DispatherServlet -->
 	<servlet>
 		<servlet-name>DispatherServlet</servlet-name>

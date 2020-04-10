@@ -11,6 +11,13 @@
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd">
 
+	<mvc:interceptors>
+	<!-- 配置拦截器，mapping exclude-mapping bean必须按顺序不然报错 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/stu/**"/>
+			<bean class="custom_interceptor.UserLoginInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
     <!-- 无论是注解式和配置式必须加 -->
 	<mvc:annotation-driven>
 		 <mvc:message-converters>
@@ -21,6 +28,8 @@
 	
 	<!-- 配置启动注解，扫描加载Controller的包 -->
 	<context:component-scan base-package="Controller"/>
+	<!-- 配置启动注解，扫描加载异常处理器的包 -->
+	<context:component-scan base-package="custom_erexception_handler"/>
 	
 	<!-- 声明controller，让容器创建，然后把请求交给这个controller id:请求url，/开头 class:类名 -->
 	<bean id="/first.do" class="Controller.UserController" />

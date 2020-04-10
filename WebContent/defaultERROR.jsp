@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-404  访问不正确
+<a style="text-align:center">404  Notfound</a>
 </body>
 </html>
